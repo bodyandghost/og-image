@@ -12,13 +12,13 @@ const bold = readFileSync(`${__dirname}/../_fonts/Inter-Bold.woff2`).toString('b
 const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString('base64');
 
 function getCss(theme: string, fontSize: string) {
-    let background = 'white';
-    let foreground = 'black';
+    let background = 'rgb(236,236,236)';
+    let foreground = 'rgb(18,18,18)';
     let radial = 'lightgray';
 
     if (theme === 'dark') {
-        background = 'black';
-        foreground = 'white';
+        background = 'rgb(18,18,18)';
+        foreground = 'rgb(236,236,236)';
         radial = 'dimgray';
     }
     return `
@@ -43,11 +43,13 @@ function getCss(theme: string, fontSize: string) {
         src: url(data:font/woff2;charset=utf-8;base64,${mono})  format("woff2");
       }
 
+    html, body {
+        height:100%;
+    }
     body {
         background: ${background};
         background-image: radial-gradient(circle at 25px 25px, ${radial} 2%, transparent 0%), radial-gradient(circle at 75px 75px, ${radial} 2%, transparent 0%);
         background-size: 100px 100px;
-        height: 100vh;
         display: flex;
         text-align: center;
         align-items: center;
@@ -131,7 +133,7 @@ export function getHtml(parsedReq: ParsedRequest) {
 </html>`;
 }
 
-function getImage(src: string, width ='auto', height = '225') {
+function getImage(src: string, width ='auto', height = '100') {
     return `<img
         class="logo"
         alt="Generated Image"
